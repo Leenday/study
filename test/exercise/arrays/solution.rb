@@ -18,8 +18,10 @@ module Exercise
       end
 
       def search(array, query)
+        raise ArgumentError, 'Argument is not numeric' unless query.is_a? Numeric
+
         indexes = Array(0..array.length - 1)
-        iter = lambda do |arr, num_search_for, indxs|
+        iter = lambda do |arr = [], num_search_for, indxs|
           slice_first_half = ->(collection) { collection[0, collection.length / 2] }
           slice_second_half = ->(collection) { collection[collection.length / 2, collection.length] }
           return arr.first == num_search_for ? indxs.first : -1 if arr.length <= 1
