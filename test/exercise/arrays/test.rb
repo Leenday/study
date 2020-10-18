@@ -14,7 +14,6 @@ class Exercise::ArraysTest < Minitest::Test
   # Функция должна возвращать индекс элемента
   def test_bin_search
     assert Exercise::Arrays.search([1], 900) == -1
-    # expect Exercise::Arrays.search([1],'w').to raise_error(ArgumentError)
     assert Exercise::Arrays.search([1], 1).zero?
     assert Exercise::Arrays.search([], 900) == -1
     assert Exercise::Arrays.search([1, 4, 5, 7, 8, 9], 9) == 5
