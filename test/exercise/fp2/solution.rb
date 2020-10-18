@@ -17,27 +17,23 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map
-        acc = Exercise::Fp2::MyArray.new
-        my_each do |element|
-          acc << yield(element)
-        end
-        acc
+        accum = Exercise::Fp2::MyArray.new
+        my_reduce(accum) { |acc, element| acc << yield(element) }
       end
 
       # Написать свою функцию my_compact
       def my_compact
-        acc = Exercise::Fp2::MyArray.new
-        my_each do |element|
+        accum = Exercise::Fp2::MyArray.new
+        my_reduce(accum) do |acc, element|
           acc << element unless element.nil?
+          acc
         end
-        acc
       end
 
       # Написать свою функцию my_reduce
       def my_reduce(acc = nil)
         my_each do |element|
           acc = acc.nil? ? element : yield(acc, element)
-          yield(acc, element) if block_given?
         end
         acc
       end
