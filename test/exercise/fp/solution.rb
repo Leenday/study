@@ -5,17 +5,8 @@ module Exercise
       # film["name"], film["rating_kinopoisk"], film["rating_imdb"],
       # film["genres"], film["year"], film["access_level"], film["country"]
       def rating(array)
-        accumulator = { rating: 0.0, count: 0 }
-        array.each_with_object(accumulator) do |film, acc|
-          if film['country'].respond_to? 'split'
-            if film['rating_kinopoisk'].to_f > 0.0 && film['country'].split(',').count >= 2
-              acc[:rating] += film['rating_kinopoisk'].to_f
-              acc[:count] += 1
-            end
-          end
-          acc
-        end
-        accumulator[:rating] / accumulator[:count]
+        ratings = array.filter_map { |film| film['rating_kinopoisk'].to_f if film['rating_kinopoisk'].to_f > 0.0 && film['country'].to_s.split(',').count >= 2 }
+        ratings.reduce(:+) / ratings.size
       end
 
       def chars_count(films, threshold)
