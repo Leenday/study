@@ -1,11 +1,12 @@
 module Exercise
   module Arrays
     class << self
+      def find_max_num(array)
+        array.reduce(0) { |acc, num| num > acc ? num : acc }
+      end
+
       def replace(array)
-        find_max_num = lambda do |arr|
-          arr.reduce(0) { |acc, num| num > acc ? num : acc }
-        end
-        highest_num = find_max_num.call(array)
+        highest_num = find_max_num(array)
         array.reduce([]) { |acc, num| acc << (num.positive? ? highest_num : num) }
       end
 
